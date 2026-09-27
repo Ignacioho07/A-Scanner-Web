@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A-Scanner Ultra | Portal VIP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .success-container { text-align: center; max-width: 500px; margin: 100px auto; animation: slideUp 1s ease-out forwards;}
+        .success-icon { font-size: 5rem; color: #2AABEE; margin-bottom: 20px; filter: drop-shadow(0 0 20px rgba(42, 171, 238, 0.4));}
+        .btn-telegram { background: #2AABEE; color: white; border: none; padding: 18px 30px; font-size: 1.2rem; font-weight: 800; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; margin-top: 30px; text-decoration: none; box-shadow: 0 10px 30px -10px #2AABEE;}
+        .btn-telegram:hover { transform: translateY(-3px); box-shadow: 0 20px 40px -10px #2AABEE;}
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="bg-glow glow-red"></div>
+    <div class="success-container glass-panel" style="padding: 50px;">
+        <i class="fa-solid fa-radar success-icon"></i>
+        <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Portal VIP</h1>
+        <p style="color: var(--platinum-dark); font-size: 1.1rem; margin-bottom: 20px;">Bienvenido a tu panel de control, Socio.</p>
+        <p style="color: var(--crimson); font-size: 0.9rem; font-weight: bold;">IMPORTANTE: Tu llave de acceso es de uso único y personal. Si el sistema detecta accesos múltiples, revoca la membresía.</p>
+        
+        <button id="btn-reclamar" class="btn-telegram">
+            <i class="fa-solid fa-key"></i> Generar mi Acceso Único
+        </button>
+        
+        <div id="link-container" style="display: none; margin-top: 20px;">
+            <p style="color: #10b981; font-weight: bold; margin-bottom: 10px;">¡Llave generada! Entrá al radar ahora (caduca en minutos):</p>
+            <a id="vip-link" href="#" class="btn-telegram" style="background: #e11d48; box-shadow: 0 10px 30px -10px #e11d48;">
+                <i class="fa-brands fa-telegram"></i> Entrar al Radar de Telegram
+            </a>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAwWCCHsbAtAhTof-_M4ACa1uiQxc1CcWI",
+            authDomain: "scanner-app-c00e9.firebaseapp.com",
+            projectId: "scanner-app-c00e9",
+            storageBucket: "scanner-app-c00e9.firebasestorage.app",
+            messagingSenderId: "236724650270",
+            appId: "1:236724650270:web:88d34f611a1154ff24890f"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const btnReclamar = document.getElementById('btn-reclamar');
+        let emailDelUsuario = "";
+
+        // 1. ESCUCHAMOS LA SESIÓN (Sin sobreescribir la base de datos)
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                emailDelUsuario = user.email; 
+            } else {
+                btnReclamar.innerText = "Error: Sesión no detectada";
+                btnReclamar.disabled = true;
+                btnReclamar.style.background = "gray";
+                alert("No pudimos detectar tu cuenta. Volvé al inicio e iniciá sesión.");
+                window.location.href = "index.html"; 
+            }
+        });
+
+        // 2. CONECTAMOS CON TU BACKEND PARA LA LLAVE
+        btnReclamar.addEventListener('click', async () => {
+            if (!emailDelUsuario) return alert("Sincronizando sesión, aguardá un segundo...");
+
+            btnReclamar.innerText = "Fabricando llave criptográfica...";
+            btnReclamar.disabled = true;
+
+            try {
+                const response = await fetch('https://ascanner-server.onrender.com/generar-acceso-vip', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: emailDelUsuario })
+                });
+
+                const data = await response.json();
+
+                if (data.link) {
+                    btnReclamar.style.display = 'none'; 
+                    const linkContainer = document.getElementById('link-container');
+                    const vipLink = document.getElementById('vip-link');
+                    
+                    vipLink.href = data.link; 
+                    linkContainer.style.display = 'block'; 
+                } else {
+                    alert("Error generando el acceso. Contactá a soporte.");
+                    btnReclamar.innerText = "Reintentar";
+                    btnReclamar.disabled = false;
+                }
+            } catch (error) {
+                alert("El servidor de Render está procesando. Reintentá en unos segundos.");
+                btnReclamar.innerText = "Reintentar";
+                btnReclamar.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
