@@ -1,198 +1,878 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A-Scanner Ultra | Financial Intelligence</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        A-Scanner Ultra | Radar de Mercado
+    </title>
+
+    <meta
+        name="description"
+        content="A-Scanner monitorea CEDEARs y acciones argentinas para detectar desfasajes de precios y actividad inusual durante la rueda."
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
+
 <body>
-    <div class="bg-glow glow-red"></div>
-    <div class="bg-glow glow-silver"></div>
 
-    <nav class="navbar">
-        <div class="logo-container">
-            <div class="logo-lightbox">
-                <img src="assets/img/logo.png" alt="A-Scanner Ultra Logo">
-            </div>
+<div class="bg-glow glow-red"></div>
+<div class="bg-glow glow-silver"></div>
+
+
+<nav class="navbar">
+
+    <div class="logo-container">
+
+        <div class="logo-lightbox">
+
+            <img
+                src="logo.png"
+                alt="A-Scanner Ultra"
+            >
+
         </div>
-        <div class="nav-links">
-            <button class="btn-login" id="btn-ingresar">
-                <i class="fa-solid fa-lock" style="margin-right: 5px; font-size: 0.8rem;"></i> Ingresar
+
+    </div>
+
+
+    <div class="nav-links">
+
+        <button
+            class="btn-login"
+            id="btn-ingresar"
+        >
+
+            <i
+                class="fa-solid fa-lock"
+                style="margin-right:5px;font-size:.8rem;"
+            ></i>
+
+            Ingresar
+
+        </button>
+
+    </div>
+
+</nav>
+
+
+<header class="hero">
+
+    <div class="hero-content">
+
+
+        <div class="badge">
+
+            <span class="pulse-dot"></span>
+
+            RADAR AUTOMÁTICO DE MERCADO
+
+        </div>
+
+
+        <h1>
+
+            A-Scanner monitorea
+            el mercado
+
+            <br>
+
+            <span class="text-gradient">
+                por vos.
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            A-Scanner analiza automáticamente
+            CEDEARs y acciones argentinas
+            durante la rueda.
+
+            Detecta desfasajes relativos de precios
+            y actividad inusual,
+            y te avisa mediante alertas simples
+            directamente en Telegram.
+
+        </p>
+
+
+        <div class="cta-group">
+
+            <button
+                class="btn-primary"
+                id="btn-suscribirse"
+            >
+
+                Probar A-Scanner Ultra
+
+                <span class="price-tag">
+                    | $10.000/mes
+                </span>
+
             </button>
-        </div>
-    </nav>
 
-    <header class="hero">
-        <div class="hero-content">
-            <div class="badge">
-                <span class="pulse-dot"></span> PLATAFORMA PRIVADA DE ARBITRAJE
-            </div>
-            <h1>El secreto mejor guardado de <br><span class="text-gradient">Wall Street.</span></h1>
-            <p>No adivines, copiá. Nuestro motor de IA detecta ineficiencias de precios y movimientos de ballenas en BYMA en tiempo real. Vos solo recibís la alerta y ganás con la diferencia.</p>
-            <div class="cta-group">
-                <button class="btn-primary" id="btn-suscribirse">
-                    Suscribirse Ahora <span class="price-tag">| $10.000/mes</span>
-                </button>
-                <p class="garantia"><i class="fa-solid fa-shield-halved"></i> Cupos limitados para mantener la liquidez del mercado.</p>
-            </div>
-        </div>
 
-        <div class="hero-image-simulated">
-            <div class="telegram-alert">
-                <div class="alert-header">
-                    <div class="tg-icon"><i class="fa-brands fa-telegram"></i></div>
-                    <span>A-Scanner Bot</span>
-                    <span class="alert-time">ahora</span>
-                </div>
-                <div class="alert-body">
-                    <strong class="alert-title"><i class="fa-solid fa-crosshairs"></i> ¡DÓLAR ESCONDIDO EN OFERTA!</strong>
-                    <div class="alert-data">
-                        <span class="data-label">CEDEAR:</span> <span class="data-value">AAPL (Apple)</span>
-                    </div>
-                    <div class="alert-data">
-                        <span class="data-label">Descuento:</span> <span class="data-value highlight-text">5.4%</span>
-                    </div>
-                    <div class="alert-divider"></div>
-                    <div class="alert-action">Acción sugerida: <strong>Comprar fuerte.</strong></div>
-                </div>
-            </div>
-        </div>
-    </header>
+            <p class="garantia">
 
-    <section class="features">
-        <div class="feature-card glass-panel">
-            <div class="icon-wrapper"><i class="fa-solid fa-magnifying-glass-dollar feature-icon"></i></div>
-            <h3>Cazador de Dólar</h3>
-            <p>Escaneamos 192 CEDEARs por segundo. Dolarizate más barato que el MEP cuando el mercado se equivoca con el precio.</p>
-        </div>
-        <div class="feature-card glass-panel">
-            <div class="icon-wrapper"><i class="fa-solid fa-water feature-icon"></i></div>
-            <h3>Radar de Ballenas</h3>
-            <p>Detectamos cuando los fondos institucionales inyectan millones en acciones argentinas para que te subas a la ola a tiempo.</p>
-        </div>
-        <div class="feature-card glass-panel">
-            <div class="icon-wrapper"><i class="fa-brands fa-telegram feature-icon"></i></div>
-            <h3>Alertas Directas</h3>
-            <p>Fricción cero. No tenés que entrar a ninguna web compleja. La oportunidad exacta te llega por un mensaje privado a tu celular.</p>
-        </div>
-    </section>
+                <i
+                    class="fa-solid fa-shield-halved"
+                ></i>
 
-    <div id="auth-modal" class="modal">
-        <div class="modal-content glass-panel">
-            <span class="close-modal"><i class="fa-solid fa-xmark"></i></span>
-            
-            <div class="modal-header">
-                <i class="fa-solid fa-lock auth-icon"></i>
-                <h2 id="modal-title">Acceso VIP</h2>
-            </div>
-            <p class="modal-subtitle" id="modal-desc">Ingresá con el MISMO EMAIL que usás en Mercado Pago.</p>
-            
-            <div class="input-group">
-                <i class="fa-regular fa-envelope input-icon"></i>
-                <input type="email" id="email-input" class="input-dark" placeholder="tu-email@gmail.com">
-            </div>
-            
-            <div class="input-group">
-                <i class="fa-solid fa-key input-icon"></i>
-                <input type="password" id="password-input" class="input-dark" placeholder="Contraseña">
-            </div>
-            
-            <p id="forgot-password" style="text-align: right; color: var(--platinum-dark); font-size: 0.8rem; cursor: pointer; margin-top: -10px; margin-bottom: 15px; transition: 0.3s;">¿Olvidaste tu contraseña?</p>
+                Alertas simples · Cancelá cuando quieras
 
-            <div class="input-group" id="confirm-group" style="display: none;">
-                <i class="fa-solid fa-shield-check input-icon"></i>
-                <input type="password" id="confirm-password-input" class="input-dark" placeholder="Confirmar contraseña">
-            </div>
-            
-            <button class="btn-primary full-width" id="btn-auth-action">Iniciar Sesión</button>
-            
-            <button id="btn-logout" style="display: none; width: 100%; margin-top: 15px; background: transparent; border: 1px solid var(--graphite-border); color: var(--platinum-dark); padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">Cerrar Sesión</button>
-
-            <p class="auth-toggle" id="auth-toggle-text">
-                ¿No tenés cuenta? <span id="toggle-link">Crear una aquí</span>
             </p>
 
-            <div class="auth-divider"><span>o</span></div>
-
-            <button class="btn-google full-width" id="btn-google">
-                <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg" alt="Google" style="width: 20px;">
-                Continuar con Google
-            </button>
         </div>
+
     </div>
 
-    <section class="faq-section">
+
+
+    <div class="hero-image-simulated">
+
+        <div class="telegram-alert">
+
+
+            <div class="alert-header">
+
+                <div class="tg-icon">
+
+                    <i
+                        class="fa-brands fa-telegram"
+                    ></i>
+
+                </div>
+
+                <span>
+                    A-Scanner Bot
+                </span>
+
+                <span class="alert-time">
+                    ahora
+                </span>
+
+            </div>
+
+
+            <div class="alert-body">
+
+
+                <strong class="alert-title">
+
+                    <i
+                        class="fa-solid fa-crosshairs"
+                    ></i>
+
+                    OPORTUNIDAD DETECTADA — AAPL
+
+                </strong>
+
+
+                <div class="alert-data">
+
+                    <span class="data-label">
+                        CCL mercado:
+                    </span>
+
+                    <span class="data-value">
+                        $1.520
+                    </span>
+
+                </div>
+
+
+                <div class="alert-data">
+
+                    <span class="data-label">
+                        CCL vía AAPL:
+                    </span>
+
+                    <span class="data-value">
+                        $1.493
+                    </span>
+
+                </div>
+
+
+                <div class="alert-data">
+
+                    <span class="data-label">
+                        Desfasaje estimado:
+                    </span>
+
+                    <span
+                        class="data-value highlight-text"
+                    >
+                        1,8%
+                    </span>
+
+                </div>
+
+
+                <div class="alert-divider"></div>
+
+
+                <div class="alert-action">
+
+                    Calidad de señal:
+
+                    <strong>
+                        ALTA
+                    </strong>
+
+                    <br><br>
+
+                    <small>
+                        Ejemplo ilustrativo.
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<section class="features">
+
+
+    <div class="feature-card glass-panel">
+
+        <div class="icon-wrapper">
+
+            <i
+                class="fa-solid fa-magnifying-glass-dollar feature-icon"
+            ></i>
+
+        </div>
+
+
+        <h3>
+            A-Scanner GAP
+        </h3>
+
+
+        <p>
+
+            Compara CEDEARs con su activo
+            en Estados Unidos,
+            su ratio confirmado y la referencia
+            del mercado para detectar
+            desfasajes relativos.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="feature-card glass-panel">
+
+        <div class="icon-wrapper">
+
+            <i
+                class="fa-solid fa-chart-column feature-icon"
+            ></i>
+
+        </div>
+
+
+        <h3>
+            A-Scanner FLOW
+        </h3>
+
+
+        <p>
+
+            Detecta actividad y volumen
+            inusual en acciones argentinas,
+            sin asumir quién está detrás
+            del movimiento.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="feature-card glass-panel">
+
+        <div class="icon-wrapper">
+
+            <i
+                class="fa-brands fa-telegram feature-icon"
+            ></i>
+
+        </div>
+
+
+        <h3>
+            Telegram en tiempo real
+        </h3>
+
+
+        <p>
+
+            No necesitás mirar otra plataforma
+            durante toda la rueda.
+
+            A-Scanner analiza el mercado
+            y te avisa cuando encuentra
+            algo relevante.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<div
+    id="auth-modal"
+    class="modal"
+>
+
+    <div class="modal-content glass-panel">
+
+
+        <span class="close-modal">
+
+            <i
+                class="fa-solid fa-xmark"
+            ></i>
+
+        </span>
+
+
+        <div class="modal-header">
+
+            <i
+                class="fa-solid fa-lock auth-icon"
+            ></i>
+
+            <h2 id="modal-title">
+                Ingresar
+            </h2>
+
+        </div>
+
+
+        <p
+            class="modal-subtitle"
+            id="modal-desc"
+        >
+
+            Ingresá a tu cuenta
+            o creá una nueva para continuar.
+
+        </p>
+
+
+        <div class="input-group">
+
+            <i
+                class="fa-regular fa-envelope input-icon"
+            ></i>
+
+            <input
+                type="email"
+                id="email-input"
+                class="input-dark"
+                placeholder="tu-email@gmail.com"
+                autocomplete="email"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <i
+                class="fa-solid fa-key input-icon"
+            ></i>
+
+            <input
+                type="password"
+                id="password-input"
+                class="input-dark"
+                placeholder="Contraseña"
+                autocomplete="current-password"
+            >
+
+        </div>
+
+
+        <p
+            id="forgot-password"
+            style="
+                text-align:right;
+                color:var(--platinum-dark);
+                font-size:.8rem;
+                cursor:pointer;
+                margin-top:-10px;
+                margin-bottom:15px;
+            "
+        >
+
+            ¿Olvidaste tu contraseña?
+
+        </p>
+
+
+        <div
+            class="input-group"
+            id="confirm-group"
+            style="display:none;"
+        >
+
+            <i
+                class="fa-solid fa-shield-halved input-icon"
+            ></i>
+
+            <input
+                type="password"
+                id="confirm-password-input"
+                class="input-dark"
+                placeholder="Confirmar contraseña"
+                autocomplete="new-password"
+            >
+
+        </div>
+
+
+        <button
+            class="btn-primary full-width"
+            id="btn-auth-action"
+        >
+            Iniciar sesión
+        </button>
+
+
+        <button
+            id="btn-logout"
+            style="
+                display:none;
+                width:100%;
+                margin-top:15px;
+                background:transparent;
+                border:1px solid var(--graphite-border);
+                color:var(--platinum-dark);
+                padding:12px;
+                border-radius:8px;
+                cursor:pointer;
+            "
+        >
+            Cerrar sesión
+        </button>
+
+
+        <p
+            class="auth-toggle"
+            id="auth-toggle-text"
+        >
+
+            ¿No tenés cuenta?
+
+            <span id="toggle-link">
+                Crear una aquí
+            </span>
+
+        </p>
+
+
+        <div class="auth-divider">
+            <span>o</span>
+        </div>
+
+
+        <button
+            class="btn-google full-width"
+            id="btn-google"
+        >
+
+            <img
+                src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg"
+                alt="Google"
+                style="width:20px;"
+            >
+
+            Continuar con Google
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<section class="faq-section">
+
     <div class="container">
-        <h2 class="section-title">Preguntas Frecuentes</h2>
-        <p class="section-subtitle">Todo lo que necesitás saber antes de unirte al radar VIP</p>
+
+
+        <h2 class="section-title">
+
+            Preguntas frecuentes
+
+        </h2>
+
+
+        <p class="section-subtitle">
+
+            Lo esencial para entender
+            cómo funciona A-Scanner Ultra.
+
+        </p>
+
 
         <div class="faq-container">
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>¿Qué es exactamente A-Scanner Ultra?</span>
-                    <i class="arrow-icon">▼</i>
-                </button>
-                <div class="faq-answer">
-                    <p>Es un software de análisis algorítmico que escanea en tiempo real más de 150 activos del mercado argentino (CEDEARs y Panel Líder). Su función principal es detectar ineficiencias matemáticas: activos desfasados en pesos que te permiten dolarizarte con descuento (Dólar Escondido) e ingresos masivos de capital institucional (Alertas de Ballenas).</p>
-                </div>
-            </div>
+
 
             <div class="faq-item">
+
                 <button class="faq-question">
-                    <span>¿Cuántas alertas voy a recibir por día?</span>
-                    <i class="arrow-icon">▼</i>
+
+                    <span>
+                        ¿Qué es A-Scanner Ultra?
+                    </span>
+
+                    <i class="arrow-icon">
+                        ▼
+                    </i>
+
                 </button>
+
+
                 <div class="faq-answer">
-                    <p>Priorizamos la calidad absoluta sobre el ruido. El mercado no siempre da oportunidades reales, por lo que el bot actúa como un francotirador: podés recibir entre 1 y 4 alertas diarias en días de alta volatilidad, o pasar jornadas en silencio si el mercado no cumple los estrictos parámetros de seguridad. No llenamos tu celular de spam, te mandamos solo operaciones con alta probabilidad de ganancia.</p>
+
+                    <p>
+
+                        A-Scanner es un radar automático
+                        especializado en CEDEARs y
+                        acciones argentinas.
+
+                        Analiza datos durante la rueda
+                        y busca desfasajes relativos
+                        de precios y actividad inusual.
+
+                        Cuando detecta una situación
+                        relevante, envía una alerta
+                        sencilla por Telegram.
+
+                    </p>
+
                 </div>
+
             </div>
 
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>¿Necesito ser un experto en finanzas para operar?</span>
-                    <i class="arrow-icon">▼</i>
-                </button>
-                <div class="faq-answer">
-                    <p>Para nada. El bot te entrega la información completamente masticada. Te dice qué activo está desarbitrado, cuál es el precio promedio del mercado, a qué precio lo estás pagando vos y el porcentaje exacto de ahorro directo. Tu única tarea es abrir tu bróker de confianza y ejecutar la orden.</p>
-                </div>
-            </div>
+
 
             <div class="faq-item">
+
                 <button class="faq-question">
-                    <span>¿Cómo funciona el pago y qué pasa si quiero cancelar?</span>
-                    <i class="arrow-icon">▼</i>
+
+                    <span>
+                        ¿A-Scanner me dice qué comprar?
+                    </span>
+
+                    <i class="arrow-icon">
+                        ▼
+                    </i>
+
                 </button>
+
+
                 <div class="faq-answer">
-                    <p>La suscripción se procesa de forma segura mediante Mercado Pago bajo el modelo de débito automático mensual. No hay contratos a largo plazo ni permanencia mínima: podés dar de baja el servicio cuando quieras con un solo clic desde tu panel de Mercado Pago, sin dar explicaciones.</p>
+
+                    <p>
+
+                        A-Scanner no intenta adivinar
+                        el futuro ni garantiza que
+                        un activo vaya a subir.
+
+                        Detecta situaciones objetivas
+                        que se salen de determinados
+                        parámetros y te muestra
+                        qué encontró para que puedas
+                        analizarlo con más información.
+
+                    </p>
+
                 </div>
+
             </div>
+
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        ¿Necesito ser experto en finanzas?
+                    </span>
+
+                    <i class="arrow-icon">
+                        ▼
+                    </i>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+
+                        No.
+
+                        El motor utiliza métricas
+                        cuantitativas internamente,
+                        pero las alertas están diseñadas
+                        para explicar en lenguaje simple
+                        qué ocurrió, cuánto se desvió
+                        el activo y qué calidad tiene
+                        la señal.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        ¿Cuántas alertas voy a recibir?
+                    </span>
+
+                    <i class="arrow-icon">
+                        ▼
+                    </i>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+
+                        No existe una cantidad fija.
+
+                        Algunas ruedas pueden presentar
+                        varias anomalías y otras
+                        prácticamente ninguna.
+
+                        A-Scanner prioriza no emitir
+                        una señal cuando la calidad
+                        de los datos no es suficiente.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        ¿Cómo funciona la suscripción?
+                    </span>
+
+                    <i class="arrow-icon">
+                        ▼
+                    </i>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+
+                        La membresía cuesta
+                        $10.000 ARS por mes
+                        y se procesa mediante
+                        Mercado Pago.
+
+                        La activación del acceso
+                        se realiza automáticamente
+                        cuando Mercado Pago confirma
+                        la suscripción.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        ¿A-Scanner garantiza ganancias?
+                    </span>
+
+                    <i class="arrow-icon">
+                        ▼
+                    </i>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+
+                        No.
+
+                        A-Scanner es una herramienta
+                        de análisis y monitoreo.
+
+                        Una anomalía puede corregirse
+                        de distintas maneras,
+                        mantenerse o incluso ampliarse.
+
+                        El objetivo es ayudarte a
+                        detectar información relevante
+                        más rápido, no garantizar
+                        resultados.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
         </div>
+
     </div>
+
 </section>
+
+
 
 <section class="contact-section">
+
     <div class="container contact-box">
+
+
         <div class="contact-content">
-            <h3>¿Te quedó alguna duda pendiente?</h3>
-            <p>Antes de sumarte, podés hablar directamente con soporte técnico para resolver cualquier inquietud sobre el bot o los métodos de pago.</p>
+
+            <h3>
+                ¿Te quedó alguna duda?
+            </h3>
+
+            <p>
+
+                Podés hablar directamente
+                con soporte antes de suscribirte.
+
+            </p>
+
         </div>
+
+
         <div class="contact-action">
-            <a href="https://t.me/SoporteAScannerUltra" target="_blank" class="btn-contact">
-                💬 Hablar con Soporte en Vivo
+
+            <a
+                href="https://t.me/SoporteAScannerUltra"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-contact"
+            >
+
+                💬 Hablar con soporte
+
             </a>
+
         </div>
+
+
     </div>
+
 </section>
 
-    <script src="app.js"></script>
-    <script type="module" src="auth.js"></script>
+
 
 <footer class="site-footer">
-    <p>&copy; 2026 A-Scanner Ultra. Todos los derechos reservados.</p>
-    <p class="footer-credits">Diseño y Tecnología: <strong>Estudio LXIX</strong></p>
+
+    <p>
+        © 2026 A-Scanner Ultra.
+        Todos los derechos reservados.
+    </p>
+
+    <p>
+        A-Scanner es una herramienta
+        de análisis y monitoreo de mercado.
+        No garantiza resultados futuros.
+    </p>
+
+    <p class="footer-credits">
+
+        Diseño y Tecnología:
+
+        <strong>
+            Estudio LXIX
+        </strong>
+
+    </p>
+
 </footer>
+
+
+<script src="app.js"></script>
+
+<script
+    type="module"
+    src="auth.js"
+></script>
+
+
 </body>
+
 </html>
