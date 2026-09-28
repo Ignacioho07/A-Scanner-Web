@@ -162,22 +162,27 @@ document.addEventListener(
 
         function reemplazarBoton() {
 
-            const oldButton =
-                document.getElementById(
-                    "btn-auth-action"
-                );
+    const oldButton =
+        document.getElementById(
+            "btn-auth-action"
+        );
 
-            const newButton =
-                oldButton.cloneNode(true);
+    const newButton =
+        oldButton.cloneNode(true);
 
-            oldButton.parentNode
-                .replaceChild(
-                    newButton,
-                    oldButton
-                );
+    // El botón original puede haber quedado deshabilitado
+    // durante el login/registro. El clon hereda ese estado,
+    // así que lo reactivamos explícitamente.
+    newButton.disabled = false;
 
-            return newButton;
-        }
+    oldButton.parentNode
+        .replaceChild(
+            newButton,
+            oldButton
+        );
+
+    return newButton;
+}
 
 
         function mostrarPago(
