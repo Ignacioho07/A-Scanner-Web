@@ -1,126 +1,383 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A-Scanner Ultra | Acceso Concedido</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        A-Scanner Ultra | Verificando pago
+    </title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
     <style>
-        .success-container { text-align: center; max-width: 500px; margin: 100px auto; animation: slideUp 1s ease-out forwards;}
-        .success-icon { font-size: 5rem; color: #10b981; margin-bottom: 20px; filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.4));}
-        .btn-telegram { background: #2AABEE; color: white; border: none; padding: 18px 30px; font-size: 1.2rem; font-weight: 800; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; margin-top: 30px; text-decoration: none; box-shadow: 0 10px 30px -10px #2AABEE;}
-        .btn-telegram:hover { transform: translateY(-3px); box-shadow: 0 20px 40px -10px #2AABEE;}
+
+        .success-container {
+            text-align: center;
+            max-width: 560px;
+            margin: 100px auto;
+            padding: 50px;
+            border-radius: 16px;
+        }
+
+        .status-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .status-title {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .status-text {
+            color: var(--platinum-dark);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .action-btn {
+            display: none;
+            width: 100%;
+            padding: 17px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 1rem;
+            color: white;
+            background: #2AABEE;
+        }
+
+        .retry-btn {
+            margin-top: 12px;
+            background: transparent;
+            color: var(--platinum-dark);
+            border: 1px solid var(--graphite-border);
+        }
+
     </style>
+
 </head>
+
+
 <body>
+
     <div class="bg-glow glow-red"></div>
-    <div class="success-container glass-panel" style="padding: 50px;">
-        <i class="fa-solid fa-circle-check success-icon"></i>
-        <h1 style="font-size: 2.5rem; margin-bottom: 10px;">¡Pago Exitoso!</h1>
-        <p style="color: var(--platinum-dark); font-size: 1.1rem; margin-bottom: 20px;">Tu membresía VIP está activa.</p>
-        <p style="color: var(--crimson); font-size: 0.9rem; font-weight: bold;">IMPORTANTE: Tu acceso al canal es personal. Si detectamos que se comparte, el bot te expulsará automáticamente.</p>
-        
-        <button id="btn-reclamar" class="btn-telegram">
-            <i class="fa-solid fa-key"></i> Generar mi Acceso Único
-        </button>
-        
-        <div id="link-container" style="display: none; margin-top: 20px;">
-            <p style="color: var(--profit-green); font-weight: bold; margin-bottom: 10px;">¡Llave generada! Hacé clic abajo para entrar (No lo compartas, caduca al usarlo):</p>
-            <a id="vip-link" href="#" class="btn-telegram" style="background: var(--crimson); box-shadow: 0 10px 30px -10px var(--crimson);">
-                <i class="fa-brands fa-telegram"></i> Entrar al Radar de Telegram
-            </a>
+
+
+    <div
+        class="success-container glass-panel"
+    >
+
+        <div
+            id="status-icon"
+            class="status-icon"
+        >
+            ⏳
         </div>
+
+
+        <h1
+            id="status-title"
+            class="status-title"
+        >
+            Verificando tu suscripción
+        </h1>
+
+
+        <p
+            id="status-text"
+            class="status-text"
+        >
+            Mercado Pago nos está confirmando el estado de tu membresía.
+            Esto normalmente tarda unos segundos.
+        </p>
+
+
+        <button
+            id="btn-radar"
+            class="action-btn"
+        >
+            🚀 Entrar a A-Scanner Ultra
+        </button>
+
+
+        <button
+            id="btn-retry"
+            class="action-btn retry-btn"
+        >
+            Volver a verificar
+        </button>
+
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        // TUS CREDENCIALES
+    <script type="module">
+
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+
+        import {
+            getAuth,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+
+        const API_BASE =
+            "https://a-scanner-server.onrender.com";
+
+
         const firebaseConfig = {
-            apiKey: "AIzaSyAwWCCHsbAtAhTof-_M4ACa1uiQxc1CcWI",
-            authDomain: "scanner-app-c00e9.firebaseapp.com",
-            projectId: "scanner-app-c00e9",
-            storageBucket: "scanner-app-c00e9.firebasestorage.app",
-            messagingSenderId: "236724650270",
-            appId: "1:236724650270:web:88d34f611a1154ff24890f"
+
+            apiKey:
+                "AIzaSyAwWCCHsbAtAhTof-_M4ACa1uiQxc1CcWI",
+
+            authDomain:
+                "scanner-app-c00e9.firebaseapp.com",
+
+            projectId:
+                "scanner-app-c00e9",
+
+            storageBucket:
+                "scanner-app-c00e9.firebasestorage.app",
+
+            messagingSenderId:
+                "236724650270",
+
+            appId:
+                "1:236724650270:web:88d34f611a1154ff24890f"
         };
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore();
 
-        const btnReclamar = document.getElementById('btn-reclamar');
-        let emailDelUsuario = "";
+        const app =
+            initializeApp(
+                firebaseConfig
+            );
 
-        // 1. ESCUCHAMOS CUANDO ATERRIZA EL CLIENTE
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                emailDelUsuario = user.email; // Guardamos el mail real
+
+        const auth =
+            getAuth(app);
+
+
+        const title =
+            document.getElementById(
+                "status-title"
+            );
+
+        const text =
+            document.getElementById(
+                "status-text"
+            );
+
+        const icon =
+            document.getElementById(
+                "status-icon"
+            );
+
+        const btnRadar =
+            document.getElementById(
+                "btn-radar"
+            );
+
+        const btnRetry =
+            document.getElementById(
+                "btn-retry"
+            );
+
+
+        function sleep(ms) {
+
+            return new Promise(
+                resolve =>
+                    setTimeout(
+                        resolve,
+                        ms
+                    )
+            );
+        }
+
+
+        async function getEstado(
+            user
+        ) {
+
+            const token =
+                await user.getIdToken();
+
+
+            const response =
+                await fetch(
+                    `${API_BASE}/mi-estado`,
+                    {
+                        headers: {
+                            Authorization:
+                                `Bearer ${token}`
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "No se pudo consultar la cuenta"
+                );
+            }
+
+
+            return response.json();
+        }
+
+
+        function mostrarActivo() {
+
+            icon.innerText =
+                "✅";
+
+            title.innerText =
+                "¡Membresía activada!";
+
+            text.innerText =
+                "Mercado Pago confirmó tu suscripción. Ya podés ingresar al radar.";
+
+            btnRadar.style.display =
+                "block";
+
+            btnRetry.style.display =
+                "none";
+        }
+
+
+        function mostrarPendiente() {
+
+            icon.innerText =
+                "⏳";
+
+            title.innerText =
+                "El pago todavía se está verificando";
+
+            text.innerText =
+                "No hace falta volver a pagar. Si Mercado Pago aprobó la suscripción, el acceso se activará cuando llegue la confirmación.";
+
+            btnRetry.style.display =
+                "block";
+        }
+
+
+        async function verificar(
+            user,
+            intentos = 15
+        ) {
+
+            for (
+                let i = 0;
+                i < intentos;
+                i++
+            ) {
 
                 try {
-                    // 2. ACTUALIZAMOS LA BASE DE DATOS A PREMIUM EN SILENCIO
-                    const userRef = doc(db, 'usuarios', user.uid);
-                    await setDoc(userRef, {
-                        email: user.email,
-                        isPremium: true,
-                        estado_suscripcion: 'activo',
-                        fecha_pago: new Date()
-                    }, { merge: true });
-                    
-                    console.log("Firebase actualizado: Cliente marcado como VIP.");
+
+                    const estado =
+                        await getEstado(
+                            user
+                        );
+
+
+                    if (
+                        estado.isPremium
+                    ) {
+
+                        mostrarActivo();
+
+                        return;
+                    }
+
                 } catch (error) {
-                    console.error("Error al sincronizar pago con Firebase:", error);
+
+                    console.error(
+                        error
+                    );
                 }
-            } else {
-                // Si entra a esta página sin estar logueado, le bloqueamos el botón
-                btnReclamar.innerText = "Error: Sesión no detectada";
-                btnReclamar.disabled = true;
-                btnReclamar.style.background = "gray";
-                alert("No pudimos detectar tu cuenta. Volvé al inicio e iniciá sesión.");
-            }
-        });
 
-        // 3. EL BOTÓN ORIGINAL CON EL MAIL REAL
-        btnReclamar.addEventListener('click', async () => {
-            if (!emailDelUsuario) {
-                return alert("Esperando a sincronizar tu sesión, aguardá un segundo...");
+
+                await sleep(2000);
             }
 
-            btnReclamar.innerText = "Fabricando llave criptográfica...";
-            btnReclamar.disabled = true;
 
-            try {
-                // LLAMADA AL BACKEND CON EL MAIL DEL CLIENTE
-                const response = await fetch('https://ascanner-server.onrender.com/generar-acceso-vip', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: emailDelUsuario })
-                });
+            mostrarPendiente();
+        }
 
-                const data = await response.json();
 
-                if (data.link) {
-                    btnReclamar.style.display = 'none'; // Ocultamos el primer botón
-                    const linkContainer = document.getElementById('link-container');
-                    const vipLink = document.getElementById('vip-link');
-                    
-                    vipLink.href = data.link; // Le inyectamos el link de 1 solo uso
-                    linkContainer.style.display = 'block'; // Mostramos el botón final
-                } else {
-                    alert("Error generando el acceso. Contactá a soporte.");
-                    btnReclamar.innerText = "Reintentar";
-                    btnReclamar.disabled = false;
+        onAuthStateChanged(
+            auth,
+            user => {
+
+                if (!user) {
+
+                    alert(
+                        "Iniciá sesión nuevamente para verificar tu suscripción."
+                    );
+
+                    window.location.href =
+                        "index.html";
+
+                    return;
                 }
-            } catch (error) {
-                alert("El servidor está procesando otros datos. Reintentá en unos segundos.");
-                btnReclamar.innerText = "Reintentar";
-                btnReclamar.disabled = false;
+
+
+                verificar(user);
             }
-        });
+        );
+
+
+        btnRadar.addEventListener(
+            "click",
+            () => {
+
+                window.location.href =
+                    "radar.html";
+            }
+        );
+
+
+        btnRetry.addEventListener(
+            "click",
+            () => {
+
+                btnRetry.style.display =
+                    "none";
+
+
+                const user =
+                    auth.currentUser;
+
+
+                if (user) {
+
+                    verificar(user);
+                }
+            }
+        );
+
     </script>
+
 </body>
+
 </html>
